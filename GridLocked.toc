@@ -1,0 +1,11 @@
+## Interface: 11507
+## Title: GridLocked
+## Notes: GridLocked Challenge Addon
+## Author: Kharzack
+## Version: 0.1
+## SavedVariables: GridLockedDB
+Core.lua
+Config.lua
+Profiles.lua
+Utils.lua
+UI\MainFrame.lua
