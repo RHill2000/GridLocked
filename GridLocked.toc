@@ -3,9 +3,13 @@
 ## Notes: GridLocked Challenge Addon
 ## Author: Kharzack
 ## Version: 0.1
-## SavedVariables: GridLockedDB
-Core.lua
-Config.lua
+## SavedVariablesPerCharacter: GridLockedDB
+Init.lua
+Constants.lua
 Profiles.lua
 Utils.lua
-UI\MainFrame.lua
+Main.lua
+UI\GridLockedFrame.lua
+UI\GridTab.lua
+UI\UnlocksTab.lua
+UI\TabButtons.lua
