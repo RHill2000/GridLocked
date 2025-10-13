@@ -9,7 +9,9 @@ Constants.lua
 Profiles.lua
 Utils.lua
 Main.lua
-UI\GridLockedFrame.lua
-UI\GridTab.lua
-UI\UnlocksTab.lua
-UI\TabButtons.lua
+
+Frames\GridLockedFrame.lua
+Frames\GridTab.lua
+Frames\UnlocksTab.lua
+Frames\SettingsTab.lua
+Frames\TabButtons.lua

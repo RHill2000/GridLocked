@@ -21,6 +21,7 @@ function ui.CreateGridLockedFrame()
 
 	ui.CreateGridTabFrame()
 	ui.CreateUnlocksTabFrame()
+	ui.CreateSettingsTabFrame()
 
 	ui.CreateTabButtons()
 

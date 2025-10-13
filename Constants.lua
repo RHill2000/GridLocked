@@ -25,3 +25,10 @@ consts.ICONS = {
 	explore  = "Interface\\Icons\\INV_Misc_Map02",
 	meta     = "Interface\\Icons\\Achievement_General",
 }
+
+consts.TAB_TEMPLATES = {
+	"PanelTabButtonTemplate",
+	"CharacterFrameTabButtonTemplate",
+	"OptionsFrameTabButtonTemplate",
+	"PanelTopTabButtonTemplate",
+}
