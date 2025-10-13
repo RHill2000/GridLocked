@@ -50,14 +50,14 @@ function utils.completeChallenge(profile, ch)
 end
 
 function utils.chooseDefaultIcon(ch)
-  if ch.type == "kill" then return utils.ICONS.kill end
+  if ch.type == "kill" then return ns.config.ICONS.kill end
   if ch.type == "gather" then
-    if ch.params and ch.params.nodeType == "herb" then return utils.ICONS.gather_h end
-    if ch.params and ch.params.nodeType == "ore"  then return utils.ICONS.gather_o end
-    return utils.ICONS.gather_h
+    if ch.params and ch.params.nodeType == "herb" then return ns.config.ICONS.gather_h end
+    if ch.params and ch.params.nodeType == "ore"  then return ns.config.ICONS.gather_o end
+    return ns.config.ICONS.gather_h
   end
-  if ch.type == "explore" then return utils.ICONS.explore end
-  return utils.ICONS.meta
+  if ch.type == "explore" then return ns.config.ICONS.explore end
+  return ns.config.ICONS.meta
 end
 
 function utils.challengeTemplateForCoord(r, c)
