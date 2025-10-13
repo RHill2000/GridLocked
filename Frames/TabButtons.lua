@@ -25,7 +25,7 @@ end
 
 local function createTabButton(id, label)
 	local tabName = frames.GridLockedFrame:GetName() .. "Tab" .. id
-	local tabButton = CreateFrame("Button", tabName, frames.GridLockedFrame, "CharacterFrameTabButtonTemplate")
+	local tabButton = CreateFrame("Button", tabName, frames.GridLockedFrame, ns.consts.TAB_TEMPLATES[1])
 
 	tabButton:SetID(id)
 	tabButton:SetText(label)
@@ -36,12 +36,14 @@ local function createTabButton(id, label)
 	end)
 
 	if id == 1 then
-		tabButton:SetPoint("TOPLEFT", frames.GridLockedFrame, "BOTTOMLEFT", 0, 0)
+		tabButton:SetPoint("TOPLEFT", frames.GridLockedFrame, "BOTTOMLEFT", 0, 1)
 	else
-		tabButton:SetPoint("LEFT", frames.GridLockedFrame:GetName() .. "Tab" .. (id - 1), "RIGHT", 15, 0)
+		tabButton:SetPoint("LEFT", frames.GridLockedFrame:GetName() .. "Tab" .. (id - 1), "RIGHT", 0, 1)
 	end
 
-	PanelTemplates_TabResize(tabButton, 0, nil, 50)
+	tabButton:HookScript("OnShow", function()
+		PanelTemplates_TabResize(tabButton, 0, nil, 75)
+	end)
 
 	return tabButton
 end

@@ -27,7 +27,6 @@ consts.ICONS = {
 }
 
 consts.TAB_TEMPLATES = {
-	"PanelTabButtonTemplate",
 	"CharacterFrameTabButtonTemplate",
 	"OptionsFrameTabButtonTemplate",
 	"PanelTopTabButtonTemplate",
