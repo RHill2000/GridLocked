@@ -18,6 +18,7 @@ function ui.CreateGridLockedFrame()
 	frames.GridLockedFrame.PortraitContainer.portrait:SetTexture("Interface/Icons/achievement_quests_completed_08")
 	frames.GridLockedFrame.TitleText:SetText("GridLocked")
 	frames.GridLockedFrame.tiles = {}
+	table.insert(UISpecialFrames, frames.GridLockedFrame:GetName())
 
 	ui.CreateGridTabFrame()
 	ui.CreateUnlocksTabFrame()

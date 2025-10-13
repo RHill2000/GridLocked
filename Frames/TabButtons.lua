@@ -23,37 +23,38 @@ local function onTabChanged()
 	end
 end
 
-local function createTabButton(id, label, anchor)
-	local tabName = anchor:GetName() .. "Tab" .. id
-	local tabButton = CreateFrame("Button", tabName, anchor, "CharacterFrameTabButtonTemplate")
+local function createTabButton(id, label)
+	local tabName = frames.GridLockedFrame:GetName() .. "Tab" .. id
+	local tabButton = CreateFrame("Button", tabName, frames.GridLockedFrame, "CharacterFrameTabButtonTemplate")
 
 	tabButton:SetID(id)
 	tabButton:SetText(label)
 	tabButton:SetScript("OnClick", function(self)
-		PanelTemplates_SetTab(anchor, self:GetID())
+		PanelTemplates_SetTab(frames.GridLockedFrame, self:GetID())
 		frames.GridLockedFrame.selectedTab = self:GetID()
 		onTabChanged()
 	end)
 
 	if id == 1 then
-		tabButton:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", 15, 0)
+		tabButton:SetPoint("TOPLEFT", frames.GridLockedFrame, "BOTTOMLEFT", 0, 0)
 	else
-		tabButton:SetPoint("LEFT", _G[anchor:GetName() .. "Tab" .. (id - 1)], "RIGHT", 15, 0)
+		tabButton:SetPoint("LEFT", frames.GridLockedFrame:GetName() .. "Tab" .. (id - 1), "RIGHT", 15, 0)
 	end
 
-	PanelTemplates_TabResize(tabButton, 0, nil, 30, 30)
+	PanelTemplates_TabResize(tabButton, 0, nil, 50)
 
 	return tabButton
 end
 
 function ui.CreateTabButtons()
-	frames.GridTabButton = createTabButton(1, "Grid", frames.GridLockedFrame)
-	frames.UnlocksTabButton = createTabButton(2, "Unlocks", frames.GridLockedFrame)
-	frames.SettingsTabButton = createTabButton(3, "Settings", frames.GridLockedFrame)
-
 	PanelTemplates_SetNumTabs(frames.GridLockedFrame, 3)
+	frames.GridLockedFrame.tabs = frames.GridLockedFrame.tabs or {}
+
+	frames.GridLockedFrame.tabs[1] = createTabButton(1, "Grid")
+	frames.GridLockedFrame.tabs[2] = createTabButton(2, "Unlocks")
+	frames.GridLockedFrame.tabs[3] = createTabButton(3, "Settings")
+
 	PanelTemplates_SetTab(frames.GridLockedFrame, 1)
-	frames.GridLockedFrame.numTabs = 3
 	frames.GridLockedFrame.selectedTab = 1
 
 	onTabChanged()
