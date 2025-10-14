@@ -3,7 +3,7 @@ local _, ns = ...
 local utils = ns.utils
 ns.utils = utils
 
-function utils.toggleUI()
+function utils.ToggleUI()
 	if not ns.frames.GridLockedFrame then
 		ns.ui.CreateGridLockedFrame()
 		table.insert(UISpecialFrames, ns.frames.GridLockedFrame:GetName())
@@ -17,14 +17,15 @@ function utils.toggleUI()
 	end
 end
 
-function utils.colourString(string, colour)
+function utils.ColourString(string, colour)
 	if not colour then
 		return string.format("|c%s%s|r", ns.consts.COLOUR, string)
 	else
 		return string.format("|c%s%s|r", colour, string)
 	end
 end
-function utils.repaintTile(id)
+
+function utils.RepaintTile(id)
 	local GridLockedFrame = type(ns.frames.GridLockedFrame) == "table" and ns.frames.GridLockedFrame or nil
 	if GridLockedFrame and GridLockedFrame.tiles and GridLockedFrame.tiles[id] then
 		GridLockedFrame.tiles[id]:paint()
@@ -48,7 +49,7 @@ function utils.UnlockNeighbors(profile, tileId)
 			local t = profile.tiles[nid]
 			if t and t.state == "locked" then
 				t.state = "unlocked"
-				ns.utils.repaintTile(nid)
+				ns.utils.RepaintTile(nid)
 			end
 		end
 	end
@@ -57,7 +58,7 @@ function utils.UnlockNeighbors(profile, tileId)
 	end
 end
 
-function utils.completeChallenge(profile, ch)
+function utils.CompleteChallenge(profile, ch)
 	if ch.status == "done" then return end
 	ch.status = "done"
 
@@ -65,14 +66,14 @@ function utils.completeChallenge(profile, ch)
 		if tile.challengeId == ch.id then
 			tile.state = "complete"
 			print("|cff00ff00GridLocked|r: Completed -> " .. (ch.label or ch.id))
-			utils.repaintTile(tileId)
+			utils.RepaintTile(tileId)
 			utils.UnlockNeighbors(profile, tileId)
 			return
 		end
 	end
 end
 
-function utils.chooseDefaultIcon(ch)
+function utils.ChooseDefaultIcon(ch)
 	if ch.type == "kill" then return ns.consts.ICONS.kill end
 	if ch.type == "gather" then
 		if ch.params and ch.params.nodeType == "herb" then return ns.consts.ICONS.gather_h end
@@ -83,7 +84,7 @@ function utils.chooseDefaultIcon(ch)
 	return ns.consts.ICONS.meta
 end
 
-function utils.challengeTemplateForCoord(r, c)
+function utils.ChallengeTemplateForCoord(r, c)
 	local tileId = string.format("%d_%d", r, c)
 	local sum = r + c
 
@@ -106,11 +107,11 @@ function utils.challengeTemplateForCoord(r, c)
 		status = "pending",
 		label = label,
 	}
-	ch.icon = utils.chooseDefaultIcon(ch)
+	ch.icon = utils.ChooseDefaultIcon(ch)
 	return ch
 end
 
-function utils.ensureTileAndChallenge(profile, r, c)
+function utils.EnsureTileAndChallenge(profile, r, c)
 	local tileId = string.format("%d_%d", r, c)
 	local chId = "C-" .. tileId
 
@@ -118,11 +119,11 @@ function utils.ensureTileAndChallenge(profile, r, c)
 	local ch = profile.challenges[chId]
 	local createdChallenge = false
 	if not ch then
-		ch = utils.challengeTemplateForCoord(r, c)
+		ch = utils.ChallengeTemplateForCoord(r, c)
 		profile.challenges[chId] = ch
 		createdChallenge = true
 	else
-		ch.icon = ch.icon or utils.chooseDefaultIcon(ch)
+		ch.icon = ch.icon or utils.ChooseDefaultIcon(ch)
 	end
 
 	profile.tiles = profile.tiles or {}
@@ -139,7 +140,7 @@ function utils.ensureTileAndChallenge(profile, r, c)
 	return tile, createdTile, createdChallenge
 end
 
-function utils.seedGrid(profile, size, opts)
+function utils.SeedGrid(profile, size, opts)
 	if not size or size < 1 then return end
 
 	local settings = opts or {}
@@ -147,7 +148,7 @@ function utils.seedGrid(profile, size, opts)
 	local startCol = math.floor(size / 2) + 1
 	for r = 1, size do
 		for c = 1, size do
-			local tile, createdTile = utils.ensureTileAndChallenge(profile, r, c)
+			local tile, createdTile = utils.EnsureTileAndChallenge(profile, r, c)
 			if r == startRow and c == startCol then
 				if tile.state ~= "complete" then
 					tile.state = "unlocked"
@@ -161,7 +162,7 @@ function utils.seedGrid(profile, size, opts)
 	profile.startTile = settings.startTile
 end
 
-function utils.tilePixels(count, scale)
+function utils.TilePixels(count, scale)
 	count = math.max(count or 0, 1)
 	scale = scale or 1
 	local tile = ns.consts.SIZE * scale
@@ -169,16 +170,16 @@ function utils.tilePixels(count, scale)
 	return (count * (tile + gap)) - gap
 end
 
-function utils.isUnlockedState(state)
+function utils.IsUnlockedState(state)
 	return state == "unlocked" or state == "complete"
 end
 
-function utils.tileKey(r, c)
+function utils.TileKey(r, c)
 	return string.format("%d_%d", r, c)
 end
 
-function utils.setIconFromChallenge(btn)
-	local profile = ns.profile.ensureProfile()
+function utils.SetIconFromChallenge(btn)
+	local profile = ns.profile.EnsureProfile()
 	local tile = profile.tiles[btn.id]
 	if not tile then return end
 	local ch = profile.challenges[tile.challengeId]
@@ -186,12 +187,12 @@ function utils.setIconFromChallenge(btn)
 		btn.icon:SetTexture("Interface\\Icons\\INV_Misc_QuestionMark")
 		return
 	end
-	local tex = ch.icon or utils.chooseDefaultIcon(ch) or "Interface\\Icons\\INV_Misc_QuestionMark"
+	local tex = ch.icon or utils.ChooseDefaultIcon(ch) or "Interface\\Icons\\INV_Misc_QuestionMark"
 	btn.icon:SetTexture(tex)
 end
 
-function utils.applyStateTint(btn)
-	local profile = ns.profile.ensureProfile()
+function utils.ApplyStateTint(btn)
+	local profile = ns.profile.EnsureProfile()
 	local tile = profile.tiles[btn.id]
 	local state = tile and tile.state or "locked"
 

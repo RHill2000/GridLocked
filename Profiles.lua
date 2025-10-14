@@ -3,13 +3,13 @@ local _, ns = ...
 local profile = ns.profile or {}
 ns.profile = profile
 
-function profile.charKey()
+local function charKey()
 	local name, realm = UnitName("player"), GetRealmName()
 	return realm .. "-" .. name
 end
 
-function profile.ensureProfile()
-	local key = profile.charKey()
+function profile.EnsureProfile()
+	local key = charKey()
 	GridLockedDB.profile = GridLockedDB.profile or {}
 	GridLockedDB.profile[key] = GridLockedDB.profile[key] or {}
 	local profile = GridLockedDB.profile[key]
@@ -26,7 +26,7 @@ function profile.ensureProfile()
 	profile.challenges = profile.challenges or {}
 
 	local desiredSize = math.max(profile.gridSize or 0, ns.consts.DEFAULT_CONFIG.gridSize)
-	ns.utils.seedGrid(profile, desiredSize)
+	ns.utils.SeedGrid(profile, desiredSize)
 
 	return profile
 end

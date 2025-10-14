@@ -7,7 +7,7 @@ handlers["kill"] = function(profile, ch)
 	if subevent ~= "PARTY_KILL" then return end
 	ch.progress = (ch.progress or 0) + 1
 	if ch.progress >= (ch.params.count or 5) then
-		ns.utils.completeChallenge(profile, ch)
+		ns.utils.CompleteChallenge(profile, ch)
 	end
 end
 
@@ -25,7 +25,7 @@ handlers["gather"] = function(profile, ch, msg)
 	if ok then
 		ch.progress = (ch.progress or 0) + 1
 		if ch.progress >= (ch.params.count or 10) then
-			ns.utils.completeChallenge(profile, ch)
+			ns.utils.CompleteChallenge(profile, ch)
 		end
 	end
 end
@@ -34,6 +34,6 @@ handlers["explore"] = function(profile, ch)
 	if ch.status == "done" then return end
 	local zone = GetRealZoneText()
 	if ch.params and ch.params.zoneName and zone == ch.params.zoneName then
-		ns.utils.completeChallenge(profile, ch)
+		ns.utils.CompleteChallenge(profile, ch)
 	end
 end
