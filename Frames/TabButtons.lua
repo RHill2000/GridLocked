@@ -12,14 +12,22 @@ local function onTabChanged()
 		frames.GridTabFrame:Show()
 		frames.UnlocksTabFrame:Hide()
 		frames.SettingsTabFrame:Hide()
+		frames.HelpTabFrame:Hide()
 	elseif selection == 2 then
 		frames.GridTabFrame:Hide()
 		frames.UnlocksTabFrame:Show()
 		frames.SettingsTabFrame:Hide()
-	else
+		frames.HelpTabFrame:Hide()
+	elseif selection == 3 then
 		frames.GridTabFrame:Hide()
 		frames.UnlocksTabFrame:Hide()
 		frames.SettingsTabFrame:Show()
+		frames.HelpTabFrame:Hide()
+	else
+		frames.GridTabFrame:Hide()
+		frames.UnlocksTabFrame:Hide()
+		frames.SettingsTabFrame:Hide()
+		frames.HelpTabFrame:Show()
 	end
 end
 
@@ -38,7 +46,7 @@ local function createTabButton(id, label)
 	if id == 1 then
 		tabButton:SetPoint("TOPLEFT", frames.GridLockedFrame, "BOTTOMLEFT", 0, 1)
 	else
-		tabButton:SetPoint("LEFT", frames.GridLockedFrame:GetName() .. "Tab" .. (id - 1), "RIGHT", 0, 1)
+		tabButton:SetPoint("LEFT", frames.GridLockedFrame:GetName() .. "Tab" .. (id - 1), "RIGHT", 0, 0)
 	end
 
 	tabButton:HookScript("OnShow", function()
@@ -49,12 +57,13 @@ local function createTabButton(id, label)
 end
 
 function ui.CreateTabButtons()
-	PanelTemplates_SetNumTabs(frames.GridLockedFrame, 3)
+	PanelTemplates_SetNumTabs(frames.GridLockedFrame, 4)
 	frames.GridLockedFrame.tabs = frames.GridLockedFrame.tabs or {}
 
 	frames.GridLockedFrame.tabs[1] = createTabButton(1, "Grid")
 	frames.GridLockedFrame.tabs[2] = createTabButton(2, "Unlocks")
 	frames.GridLockedFrame.tabs[3] = createTabButton(3, "Settings")
+	frames.GridLockedFrame.tabs[4] = createTabButton(4, "Help")
 
 	PanelTemplates_SetTab(frames.GridLockedFrame, 1)
 	frames.GridLockedFrame.selectedTab = 1

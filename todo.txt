@@ -1,0 +1,4 @@
+minimap button
+help tab
+start up screen
+bug reporting tools?

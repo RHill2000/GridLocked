@@ -1,6 +1,6 @@
 ## Interface: 11507
-## Title: GridLocked
-## Notes: GridLocked Challenge Addon
+## Title: |cFFC189F5Grid Locked|r
+## Notes: Grid Locked Challenge Addon
 ## Author: Kharzack
 ## Version: 0.1
 ## SavedVariablesPerCharacter: GridLockedDB
@@ -11,7 +11,9 @@ Utils.lua
 Main.lua
 
 Frames\GridLockedFrame.lua
+Frames\StartTab.lua
 Frames\GridTab.lua
 Frames\UnlocksTab.lua
 Frames\SettingsTab.lua
+Frames\HelpTab.lua
 Frames\TabButtons.lua

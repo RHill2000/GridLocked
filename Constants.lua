@@ -3,6 +3,10 @@ local _, ns = ...
 local consts = ns.consts or {}
 ns.consts = consts
 
+consts.VERSION = 0.1
+
+consts.COLOUR = "FFC189F5"
+
 consts.DEFAULT_CONFIG = {
 	gridSize = 13,
 	tiles = {},

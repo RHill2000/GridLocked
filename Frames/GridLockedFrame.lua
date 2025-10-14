@@ -16,13 +16,14 @@ function ui.CreateGridLockedFrame()
 	frames.GridLockedFrame:SetSize(ns.consts.GRID_WIDTH + 300 + (ns.consts.GRID_PADDING * 2), ns.consts.GRID_HEIGHT + (ns.consts.GRID_PADDING * 5))
 	frames.GridLockedFrame:SetPoint("CENTER")
 	frames.GridLockedFrame.PortraitContainer.portrait:SetTexture("Interface/Icons/achievement_quests_completed_08")
-	frames.GridLockedFrame.TitleText:SetText("GridLocked")
+	frames.GridLockedFrame.TitleText:SetText("Grid Locked")
 	frames.GridLockedFrame.tiles = {}
 	table.insert(UISpecialFrames, frames.GridLockedFrame:GetName())
 
 	ui.CreateGridTabFrame()
 	ui.CreateUnlocksTabFrame()
 	ui.CreateSettingsTabFrame()
+	ui.CreateHelpTabFrame()
 
 	ui.CreateTabButtons()
 end

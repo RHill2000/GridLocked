@@ -3,6 +3,27 @@ local _, ns = ...
 local utils = ns.utils
 ns.utils = utils
 
+function utils.toggleUI()
+	if not ns.frames.GridLockedFrame then
+		ns.ui.CreateGridLockedFrame()
+		table.insert(UISpecialFrames, ns.frames.GridLockedFrame:GetName())
+		ns.frames.GridLockedFrame:Hide()
+	end
+
+	if ns.frames.GridLockedFrame:IsShown() then
+		ns.frames.GridLockedFrame:Hide()
+	else
+		ns.frames.GridLockedFrame:Show()
+	end
+end
+
+function utils.colourString(string, colour)
+	if not colour then
+		return string.format("|c%s%s|r", ns.consts.COLOUR, string)
+	else
+		return string.format("|c%s%s|r", colour, string)
+	end
+end
 function utils.repaintTile(id)
 	local GridLockedFrame = type(ns.frames.GridLockedFrame) == "table" and ns.frames.GridLockedFrame or nil
 	if GridLockedFrame and GridLockedFrame.tiles and GridLockedFrame.tiles[id] then
