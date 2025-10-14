@@ -6,19 +6,32 @@ local frames = ns.frames
 ns.frames = frames
 
 function ui.CreateGridTabFrame()
-	frames.GridTabFrame = CreateFrame("Frame", "GridLockedGridTabFrame", frames.GridLockedFrame)
+	local mainframe = frames.MainFrame
 
-	frames.GridContainerFrame = CreateFrame("Frame", "GridLockedGridContainerFrame", frames.GridTabFrame, "InsetFrameTemplate")
-	frames.GridContainerFrame:SetPoint("TOPLEFT", frames.GridLockedFrame, "TOPLEFT", 300, -20 - ns.consts.GRID_PADDING)
-	frames.GridContainerFrame:SetPoint("BOTTOMRIGHT", frames.GridLockedFrame, "BOTTOMRIGHT", -ns.consts.GRID_PADDING, ns.consts.GRID_PADDING)
+	frames.GridTabFrame = CreateFrame("Frame", "GridLockedGridTabFrame", mainframe)
+	local currentTab = frames.GridTabFrame
 
-	frames.GridFrame = CreateFrame("ScrollFrame", "GridLockedGridFrame", frames.GridContainerFrame)
-	frames.GridFrame:SetPoint("CENTER")
-	frames.GridFrame:SetSize(ns.consts.GRID_WIDTH, ns.consts.GRID_HEIGHT)
-	frames.GridFrame:SetClipsChildren(true)
+	currentTab.AvailableUnlocksText = currentTab:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+	currentTab.AvailableUnlocksText:SetPoint("TOP", mainframe.TitleText, "BOTTOM", -270, -20)
+	currentTab.AvailableUnlocksText:SetText(string.format("Available Unlocks: %d", 0))
+	currentTab.AvailableUnlocksText:SetTextColor(1, 0, 0)
+	print(mainframe:GetHeight())
+	
+	currentTab.CurrentChallengeFrame = CreateFrame("Frame", "GridLockedCurrentChallengeFrame", currentTab, "InsetFrameTemplate2")
+	currentTab.CurrentChallengeFrame:SetPoint("TOPLEFT", mainframe, "TOPLEFT", 20, -70)
+	currentTab.CurrentChallengeFrame:SetPoint("BOTTOMRIGHT", mainframe, "BOTTOMRIGHT", -300, 600)
 
-	frames.Grid = CreateFrame("Frame", "GridLockedGrid", frames.GridFrame)
-	frames.Grid:SetPoint("TOPLEFT")
+	currentTab.GridContainerFrame = CreateFrame("Frame", "GridLockedGridContainerFrame", currentTab, "InsetFrameTemplate")
+	currentTab.GridContainerFrame:SetPoint("TOPLEFT", mainframe, "TOPLEFT", 300, -20 - ns.consts.GRID_PADDING)
+	currentTab.GridContainerFrame:SetPoint("BOTTOMRIGHT", mainframe, "BOTTOMRIGHT", -ns.consts.GRID_PADDING, ns.consts.GRID_PADDING)
 
-	frames.GridFrame:SetScrollChild(frames.Grid)
+	-- currentTab.GridFrame = CreateFrame("ScrollFrame", "GridLockedGridFrame", currentTab.GridContainerFrame)
+	-- currentTab.GridFrame:SetPoint("CENTER")
+	-- currentTab.GridFrame:SetSize(ns.consts.GRID_WIDTH, ns.consts.GRID_HEIGHT)
+	-- currentTab.GridFrame:SetClipsChildren(true)
+
+	-- currentTab.Grid = CreateFrame("Frame", "GridLockedGrid", currentTab.GridFrame)
+	-- currentTab.Grid:SetPoint("TOPLEFT")
+
+	-- currentTab.GridFrame:SetScrollChild(currentTab.Grid)
 end

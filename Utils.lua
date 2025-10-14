@@ -4,16 +4,19 @@ local utils = ns.utils
 ns.utils = utils
 
 function utils.ToggleUI()
-	if not ns.frames.GridLockedFrame then
-		ns.ui.CreateGridLockedFrame()
-		table.insert(UISpecialFrames, ns.frames.GridLockedFrame:GetName())
-		ns.frames.GridLockedFrame:Hide()
+	if not ns.frames.MainFrame then
+		ns.ui.CreateMainFrame()
+		table.insert(UISpecialFrames, ns.frames.MainFrame:GetName())
+		ns.frames.MainFrame:Hide()
 	end
 
-	if ns.frames.GridLockedFrame:IsShown() then
-		ns.frames.GridLockedFrame:Hide()
+	ns.frames.MainFrame.selectedTab = 1
+	PanelTemplates_SetTab(ns.frames.MainFrame, 1)
+
+	if ns.frames.MainFrame:IsShown() then
+		ns.frames.MainFrame:Hide()
 	else
-		ns.frames.GridLockedFrame:Show()
+		ns.frames.MainFrame:Show()
 	end
 end
 
@@ -26,16 +29,16 @@ function utils.ColourString(string, colour)
 end
 
 function utils.RepaintTile(id)
-	local GridLockedFrame = type(ns.frames.GridLockedFrame) == "table" and ns.frames.GridLockedFrame or nil
-	if GridLockedFrame and GridLockedFrame.tiles and GridLockedFrame.tiles[id] then
-		GridLockedFrame.tiles[id]:paint()
+	local MainFrame = type(ns.frames.MainFrame) == "table" and ns.frames.MainFrame or nil
+	if MainFrame and MainFrame.tiles and MainFrame.tiles[id] then
+		MainFrame.tiles[id]:paint()
 	end
 end
 
 function utils.RefreshTileVisibility()
-	local GridLockedFrame = type(ns.frames.GridLockedFrame) == "table" and ns.frames.GridLockedFrame or nil
-	if GridLockedFrame and GridLockedFrame.UpdateTileVisibility then
-		GridLockedFrame:UpdateTileVisibility()
+	local MainFrame = type(ns.frames.MainFrame) == "table" and ns.frames.MainFrame or nil
+	if MainFrame and MainFrame.UpdateTileVisibility then
+		MainFrame:UpdateTileVisibility()
 	end
 end
 

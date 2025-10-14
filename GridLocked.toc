@@ -11,7 +11,7 @@ Profiles.lua
 Utils.lua
 Main.lua
 
-Frames\GridLockedFrame.lua
+Frames\MainFrame.lua
 Frames\StartTab.lua
 Frames\GridTab.lua
 Frames\UnlocksTab.lua

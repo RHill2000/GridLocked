@@ -6,7 +6,7 @@ local frames = ns.frames
 ns.frames = frames
 
 local function onTabChanged()
-	local selection = frames.GridLockedFrame.selectedTab
+	local selection = frames.MainFrame.selectedTab
 	local tabFrames = {
 		frames.GridTabFrame,
 		frames.UnlocksTabFrame,
@@ -24,21 +24,21 @@ local function onTabChanged()
 end
 
 local function createTabButton(id, label)
-	local tabName = frames.GridLockedFrame:GetName() .. "Tab" .. id
-	local tabButton = CreateFrame("Button", tabName, frames.GridLockedFrame, ns.consts.TAB_TEMPLATES[1])
+	local tabName = frames.MainFrame:GetName() .. "Tab" .. id
+	local tabButton = CreateFrame("Button", tabName, frames.MainFrame, ns.consts.TAB_TEMPLATES[1])
 
 	tabButton:SetID(id)
 	tabButton:SetText(label)
 	tabButton:SetScript("OnClick", function(self)
-		PanelTemplates_SetTab(frames.GridLockedFrame, self:GetID())
-		frames.GridLockedFrame.selectedTab = self:GetID()
+		PanelTemplates_SetTab(frames.MainFrame, self:GetID())
+		frames.MainFrame.selectedTab = self:GetID()
 		onTabChanged()
 	end)
 
 	if id == 1 then
-		tabButton:SetPoint("TOPLEFT", frames.GridLockedFrame, "BOTTOMLEFT", 0, 1)
+		tabButton:SetPoint("TOPLEFT", frames.MainFrame, "BOTTOMLEFT", 0, 1)
 	else
-		tabButton:SetPoint("LEFT", frames.GridLockedFrame:GetName() .. "Tab" .. (id - 1), "RIGHT", 0, 0)
+		tabButton:SetPoint("LEFT", frames.MainFrame:GetName() .. "Tab" .. (id - 1), "RIGHT", 0, 0)
 	end
 
 	tabButton:HookScript("OnShow", function()
@@ -49,15 +49,15 @@ local function createTabButton(id, label)
 end
 
 function ui.CreateTabButtons()
-	PanelTemplates_SetNumTabs(frames.GridLockedFrame, 4)
-	frames.GridLockedFrame.tabs = frames.GridLockedFrame.tabs or {}
+	PanelTemplates_SetNumTabs(frames.MainFrame, 4)
+	frames.MainFrame.tabs = frames.MainFrame.tabs or {}
 
-	frames.GridLockedFrame.tabs[1] = createTabButton(1, "Grid")
-	frames.GridLockedFrame.tabs[2] = createTabButton(2, "Unlocks")
-	frames.GridLockedFrame.tabs[3] = createTabButton(3, "Settings")
-	frames.GridLockedFrame.tabs[4] = createTabButton(4, "Help")
+	frames.MainFrame.tabs[1] = createTabButton(1, "Grid")
+	frames.MainFrame.tabs[2] = createTabButton(2, "Unlocks")
+	frames.MainFrame.tabs[3] = createTabButton(3, "Settings")
+	frames.MainFrame.tabs[4] = createTabButton(4, "Help")
 
-	PanelTemplates_SetTab(frames.GridLockedFrame, 1)
-	frames.GridLockedFrame.selectedTab = 1
+	PanelTemplates_SetTab(frames.MainFrame, 1)
+	frames.MainFrame.selectedTab = 1
 	onTabChanged()
 end
