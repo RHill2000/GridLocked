@@ -1,9 +1,10 @@
 ## Interface: 11507
 ## Title: |cFFC189F5Grid Locked|r
-## Notes: Grid Locked Challenge Addon
+## Notes: Grid Locked Challenge Addon by Kharzack
 ## Author: Kharzack
-## Version: 0.1
+## Version: 1.0
 ## SavedVariablesPerCharacter: GridLockedDB
+
 Init.lua
 Constants.lua
 Profiles.lua

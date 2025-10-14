@@ -7,27 +7,19 @@ ns.frames = frames
 
 local function onTabChanged()
 	local selection = frames.GridLockedFrame.selectedTab
+	local tabFrames = {
+		frames.GridTabFrame,
+		frames.UnlocksTabFrame,
+		frames.SettingsTabFrame,
+		frames.HelpTabFrame,
+	}
 
-	if selection == 1 then
-		frames.GridTabFrame:Show()
-		frames.UnlocksTabFrame:Hide()
-		frames.SettingsTabFrame:Hide()
-		frames.HelpTabFrame:Hide()
-	elseif selection == 2 then
-		frames.GridTabFrame:Hide()
-		frames.UnlocksTabFrame:Show()
-		frames.SettingsTabFrame:Hide()
-		frames.HelpTabFrame:Hide()
-	elseif selection == 3 then
-		frames.GridTabFrame:Hide()
-		frames.UnlocksTabFrame:Hide()
-		frames.SettingsTabFrame:Show()
-		frames.HelpTabFrame:Hide()
-	else
-		frames.GridTabFrame:Hide()
-		frames.UnlocksTabFrame:Hide()
-		frames.SettingsTabFrame:Hide()
-		frames.HelpTabFrame:Show()
+	for index, value in ipairs(tabFrames) do
+		if index == selection then
+			value:Show()
+		else
+			value:Hide()
+		end
 	end
 end
 
@@ -67,6 +59,5 @@ function ui.CreateTabButtons()
 
 	PanelTemplates_SetTab(frames.GridLockedFrame, 1)
 	frames.GridLockedFrame.selectedTab = 1
-
 	onTabChanged()
 end
