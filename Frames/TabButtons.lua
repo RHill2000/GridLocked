@@ -5,24 +5,6 @@ ns.ui = ui
 local frames = ns.frames
 ns.frames = frames
 
-local function onTabChanged()
-	local selection = frames.MainFrame.selectedTab
-	local tabFrames = {
-		frames.GridTabFrame,
-		frames.UnlocksTabFrame,
-		frames.SettingsTabFrame,
-		frames.HelpTabFrame,
-	}
-
-	for index, value in ipairs(tabFrames) do
-		if index == selection then
-			value:Show()
-		else
-			value:Hide()
-		end
-	end
-end
-
 local function createTabButton(id, label)
 	local tabName = frames.MainFrame:GetName() .. "Tab" .. id
 	local tabButton = CreateFrame("Button", tabName, frames.MainFrame, ns.consts.TAB_TEMPLATES[1])
@@ -32,7 +14,7 @@ local function createTabButton(id, label)
 	tabButton:SetScript("OnClick", function(self)
 		PanelTemplates_SetTab(frames.MainFrame, self:GetID())
 		frames.MainFrame.selectedTab = self:GetID()
-		onTabChanged()
+		ns.utils.OnTabChanged()
 	end)
 
 	if id == 1 then
@@ -59,5 +41,5 @@ function ui.CreateTabButtons()
 
 	PanelTemplates_SetTab(frames.MainFrame, 1)
 	frames.MainFrame.selectedTab = 1
-	onTabChanged()
+	ns.utils.OnTabChanged()
 end

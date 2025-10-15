@@ -3,9 +3,35 @@ local _, ns = ...
 local utils = ns.utils
 ns.utils = utils
 
+function utils.CreateCustomDialogFrame(currentTab, label, offSetWidth, offsetHeight)
+	local frameName = string.gsub(label, "%s+", "")
+	local currentFrame = CreateFrame("Frame", "GridLocked" .. frameName .. "Frame", currentTab, "GridLockedDialogTemplate")
+	utils.SetFrameLocation(currentFrame, 280, 120, ns.frames.MainFrame, offSetWidth, offsetHeight)
+	currentFrame.TitleContainer.TitleText:SetText(label)
+	return currentFrame
+end
+
 function utils.SetFrameLocation(frame, frameWidth, frameHeight, anchor, offSetWidth, offsetHeight)
 	frame:SetPoint("TOPLEFT", anchor, "TOPLEFT", offSetWidth, offsetHeight)
 	frame:SetPoint("BOTTOMRIGHT", anchor, "TOPLEFT", offSetWidth + frameWidth, offsetHeight - frameHeight)
+end
+
+function utils.OnTabChanged()
+	local selection = ns.frames.MainFrame.selectedTab
+	local tabFrames = {
+		ns.frames.GridTabFrame,
+		ns.frames.UnlocksTabFrame,
+		ns.frames.SettingsTabFrame,
+		ns.frames.HelpTabFrame,
+	}
+
+	for index, value in ipairs(tabFrames) do
+		if index == selection then
+			value:Show()
+		else
+			value:Hide()
+		end
+	end
 end
 
 function utils.ToggleUI()
@@ -17,6 +43,7 @@ function utils.ToggleUI()
 
 	ns.frames.MainFrame.selectedTab = 1
 	PanelTemplates_SetTab(ns.frames.MainFrame, 1)
+	utils.OnTabChanged()
 
 	if ns.frames.MainFrame:IsShown() then
 		ns.frames.MainFrame:Hide()
