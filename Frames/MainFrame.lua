@@ -21,6 +21,7 @@ function ui.CreateMainFrame()
 	table.insert(UISpecialFrames, frames.MainFrame:GetName())
 
 	ns.consts.MAINFRAME_HEIGHT = frames.MainFrame:GetHeight()
+	ns.consts.MAINFRAME_WIDTH = frames.MainFrame:GetWidth()
 
 	ui.CreateGridTabFrame()
 	ui.CreateUnlocksTabFrame()

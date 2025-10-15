@@ -3,6 +3,11 @@ local _, ns = ...
 local utils = ns.utils
 ns.utils = utils
 
+function utils.SetFrameLocation(frame, frameWidth, frameHeight, anchor, offSetWidth, offsetHeight)
+	frame:SetPoint("TOPLEFT", anchor, "TOPLEFT", offSetWidth, offsetHeight)
+	frame:SetPoint("BOTTOMRIGHT", anchor, "TOPLEFT", offSetWidth + frameWidth, offsetHeight - frameHeight)
+end
+
 function utils.ToggleUI()
 	if not ns.frames.MainFrame then
 		ns.ui.CreateMainFrame()

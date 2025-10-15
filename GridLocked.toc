@@ -11,6 +11,7 @@ Profiles.lua
 Utils.lua
 Main.lua
 
+Frames\CustomFrames.xml
 Frames\MainFrame.lua
 Frames\StartTab.lua
 Frames\GridTab.lua

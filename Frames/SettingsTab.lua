@@ -6,5 +6,5 @@ local frames = ns.frames
 ns.frames = frames
 
 function ui.CreateSettingsTabFrame()
-	frames.SettingsTabFrame = CreateFrame("Frame", "GridLockedSettingsTabFrame", frames.GridLockedFrame)
+	frames.SettingsTabFrame = CreateFrame("Frame", "GridLockedSettingsTabFrame", frames.MainFrame)
 end
